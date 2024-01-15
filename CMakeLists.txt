@@ -11,7 +11,11 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(CMakeSFMLProject src/main.cpp
-        src/PhysicsObject.h)
+        src/PhysicsObject.hpp
+        src/Solver.cpp
+        src/Solver.hpp
+        src/PhysicsObject.cpp
+        src/PhysicsObject.hpp)
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 
