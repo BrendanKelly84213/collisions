@@ -19,6 +19,7 @@ public:
     void checkCollisions();
     void checkOutOfBounds();
     void applyGravity();
+    void updateObjects(float dt);
 
     std::vector<PhysicsObject>& objects() { return m_objects; }
 

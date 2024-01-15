@@ -4,6 +4,7 @@
 
 #include "Solver.hpp"
 #include <iostream>
+#include <valarray>
 
 void Solver::checkOutOfBounds()
 {
@@ -31,38 +32,50 @@ void Solver::addRandomObjects(unsigned int count)
     for (auto i = 0u; i < count; ++i) {
         auto x = static_cast<float>(rand() % m_width);
         auto y = static_cast<float>(rand() % m_height);
+        for (auto& object : m_objects ) {
+            auto distance = std::sqrt(std::pow(object.position().x - x, 2) + std::pow(object.position().y - y, 2));
+            if (distance < object.radius() + 10) {
+                x += object.radius() * 2 ;
+                y += object.radius() * 2;
+            }
+        }
         auto mass = static_cast<float>(rand() % 50);
         auto object = PhysicsObject{ { x, y }, mass };
-        m_objects.push_back(object);
+        object.setId(i);
+        addObject(object);
     }
 }
 
 void Solver::update(float dt)
 {
-    checkOutOfBounds();
-    checkCollisions();
     for (size_t i = 0; i < m_substeps; ++i) {
         float subDt = dt / static_cast<float>(m_substeps);
         applyGravity();
-        for (auto &object: m_objects) {
-            object.update(subDt);
-        }
+        checkOutOfBounds();
+        checkCollisions();
+        updateObjects(subDt);
     }
 }
 
 void Solver::checkCollisions()
 {
-
 }
 
 void Solver::addObject(PhysicsObject object)
 {
-
+    m_objects.push_back(object);
 }
 
 void Solver::applyGravity()
 {
     for (auto& object : m_objects) {
         object.applyForce({0, 9800.f});
+    }
+}
+
+void Solver::updateObjects(float dt)
+{
+    for (auto& object : m_objects) {
+        object.update(dt);
     }
 }

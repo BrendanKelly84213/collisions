@@ -27,6 +27,7 @@ public:
 
     sf::Vector2f position() const { return m_currentPos; }
     sf::Vector2f velocity() const { return m_velocity; }
+    float mass() const { return m_mass; }
     bool fixed() const { return m_fixed; }
     size_t id() const { return m_id; }
     float radius() const { return m_radius; }

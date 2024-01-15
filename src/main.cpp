@@ -7,23 +7,13 @@
 const unsigned Width = 800u;
 const unsigned Height = 800u;
 
-float dot_product(sf::Vector2f a, sf::Vector2f b)
-{
-    return a.x * b.x + a.y * b.y;
-}
-
-float distance(sf::Vector2f a, sf::Vector2f b)
-{
-    return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
-}
-
 int main()
 {
-    auto window = sf::RenderWindow{ { Width, Height }, "CMake SFML Project" };
+    auto window = sf::RenderWindow{ { Width, Height }, "Collisions!" };
     window.setFramerateLimit(60);
 
     Solver solver{ 8, window.getSize().x, window.getSize().y };
-    solver.addRandomObjects(10);
+    solver.addRandomObjects(5);
     sf::Clock clock;
     sf::Clock spawnClock = sf::Clock{};
 
