@@ -11,8 +11,8 @@ class PhysicsObject {
 public:
     PhysicsObject() = default;
 
-    PhysicsObject(sf::Vector2f pos, float mass)
-            : m_currentPos(pos), m_oldPos(pos), m_accel({0, 0}), m_forces({0, 0}), m_mass(mass), m_fixed(false), m_id(0), m_radius(mass)
+    PhysicsObject(sf::Vector2f pos, float mass, float coefficientOfRestitution = 1.f)
+            : m_currentPos(pos), m_oldPos(pos), m_accel({0, 0}), m_forces({0, 0}), m_mass(mass), m_fixed(false), m_id(0), m_radius(mass), m_coefficientOfRestitution(coefficientOfRestitution)
     {
     }
 
@@ -31,6 +31,7 @@ public:
     bool fixed() const { return m_fixed; }
     size_t id() const { return m_id; }
     float radius() const { return m_radius; }
+    float coefficientOfRestitution() const { return m_coefficientOfRestitution; }
 
 private:
     sf::Vector2f m_currentPos;
@@ -42,6 +43,7 @@ private:
     bool m_fixed;
     size_t m_id;
     float m_radius;
+    float m_coefficientOfRestitution;
 };
 
 #endif //PHYSICSOBJECT_HPP

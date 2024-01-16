@@ -11,10 +11,10 @@
 class Solver {
 public:
     Solver() = default;
-    Solver(size_t substeps, unsigned int width, unsigned int height) : m_substeps(substeps), m_width(width), m_height(height) {}
+    Solver(const size_t substeps, const unsigned int width, const unsigned int height) : m_substeps(substeps), m_width(width), m_height(height) {}
 
     void addRandomObjects(unsigned int count);
-    void addObject(PhysicsObject object);
+    void addObject(const PhysicsObject& object);
     void update(float dt);
     void checkCollisions();
     void checkOutOfBounds();
