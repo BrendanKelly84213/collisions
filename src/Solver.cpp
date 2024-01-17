@@ -74,8 +74,8 @@ void Solver::checkCollisions()
                 // Move the objects so they are no longer colliding
                 const auto overlap = (object.radius() + other.radius()) - distance;
                 const auto direction = (object.position() - other.position()) / distance;
-                object.setPosition(object.position() + direction * overlap / 1.5f);
-                other.setPosition(other.position() - direction * overlap / 1.5f);
+                object.setPosition(object.position() + direction * overlap * 0.5f);
+                other.setPosition(other.position() - direction * overlap * 0.5f);
                 object.setVelocity((object.velocity() - newObjectVelocity) * object.coefficientOfRestitution());
                 other.setVelocity((other.velocity() - newOtherVelocity) * object.coefficientOfRestitution());
             }
